@@ -20,7 +20,7 @@ mac OS的安装过程和Linux类似，
 
 进入ES目录执行`./bin/elasticsearch`命令，运行正常，通过浏览器访问出现以下响应：
 
-`json
+`
 {
 "name": "x4x7wWJ",
 "cluster_name": "elasticsearch",
