@@ -133,7 +133,7 @@ pri.store.size：主分片占用的大小
 
 ### 删除索引
 
-删除`demo`索引
+删除`demo`索引，**删除索引等同于删库跑路，请谨慎操作。**
 
 `DELETE http://localhost:9200/demo`
 
@@ -145,7 +145,163 @@ ES响应：
 
 `}`
 
-## 类型Type
+## 类型Type（同时定义映射Mapping字段及类型）
+
+### 创建类型
+
+在前面**基本术语**中我们提到类型Type类似关系型数据库中的表，映射Mapping定义表结构。创建类型Type时需要配合映射Mapping。
+
+创建索引`demo`的类型为`example_type`,包含两个字段：`created`类型为date，`message`类型为keyword：
+
+**方式一：**
+
+`PUT http://localhost:9200/demo/_mapping/example_type`
+
+或
+
+`PUT http://localhost:9200/demo/example_type`
+
+`{`
+
+`    "properties":{`
+
+`        "created":{`
+
+`            "type":"date"`
+
+`        },`
+
+`        "message":{`
+
+`            "type":"keyword"`
+
+`        }`
+
+`    }`
+
+`}`
+
+ES响应：
+
+`{`
+
+`    "acknowledged": true`
+
+`}`
+
+此时再次执行查询索引的操作，已经可以发现类型Type被创建了，遗憾的是，如果类型Type（或者映射Mapping）一旦定义，就不能删除，只能修改，为了保证本教程顺利进行方式二创建类型，所以此处执行`DELETE http://localhost:9200/demo`删除索引。删除索引后不要再创建索引，下面的这种方式是在创建索引的同时创建Type并定义Mapping
+
+**方式二：**
+
+`PUT http://localhost:9200/demo`
+
+`{`
+
+`	"mappings":{`
+
+`		"example_type":{`
+
+`			"properties":{`
+
+`		        "created":{`
+
+`		            "type":"date"`
+
+`		        },`
+
+`		        "message":{`
+
+`		            "type":"keyword"`
+
+`		        }`
+
+`    		}`
+
+`		}`
+
+`	}`
+
+`}`
+
+ES响应：
+
+`{`
+
+`    "acknowledged": true,`
+
+`    "shards_acknowledged": true,`
+
+`    "index": "demo"`
+
+`}`
+
+此时执行`GET http://localhost:9200/demo`，会出现以下ES的响应：
+
+`{`
+
+`    "demo": {`
+
+`        "aliases": {},`
+
+`        "mappings": {`
+
+`            "example_type": {`
+
+`                "properties": {`
+
+`                    "created": {`
+
+`                        "type": "date"`
+
+`                    },`
+
+`                    "message": {`
+
+`                        "type": "keyword"`
+
+`                    }`
+
+`                }`
+
+`            }`
+
+`        },`
+
+`        "settings": {`
+
+`            "index": {`
+
+`                "creation_date": "1561133726237",`
+
+`                "number_of_shards": "5",`
+
+`                "number_of_replicas": "1",`
+
+`                "uuid": "NUIzk_CkRh6L9z-_O1tVDQ",`
+
+`                "version": {`
+
+`                    "created": "5060099"`
+
+`                },`
+
+`                "provided_name": "demo"`
+
+`            }`
+
+`        }`
+
+`    }`
+
+`}`
+
+可以看到我们在ES中创建了第一个索引以及创建的表结构，接下来插入就是数据（即文档）。
+
+## 文档Document
+
+插入文档
+
+
 
 
 
