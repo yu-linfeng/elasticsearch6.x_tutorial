@@ -18,7 +18,7 @@ ES响应：
 
 `{`
 
-    `"acknowledged": true,`
+`"acknowledged": true,`
 
 `"shards_acknowledged": true,`
 
