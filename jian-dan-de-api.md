@@ -1,5 +1,7 @@
 # 简单的API
 
+> 万丈高楼平地起
+
 ES提供了多种操作数据的方式，其中较为常见的方式就是RESTful风格的API。
 
 简单的体验
@@ -163,21 +165,21 @@ ES响应：
 
 `{`
 
-`    "properties":{`
+`"properties":{`
 
-`        "created":{`
+`"created":{`
 
-`            "type":"date"`
+`"type":"date"`
 
-`        },`
+`},`
 
-`        "message":{`
+`"message":{`
 
-`            "type":"keyword"`
+`"type":"keyword"`
 
-`        }`
+`}`
 
-`    }`
+`}`
 
 `}`
 
@@ -185,7 +187,7 @@ ES响应：
 
 `{`
 
-`    "acknowledged": true`
+`"acknowledged": true`
 
 `}`
 
@@ -197,29 +199,29 @@ ES响应：
 
 `{`
 
-`	"mappings":{`
+`"mappings":{`
 
-`		"example_type":{`
+`"example_type":{`
 
-`			"properties":{`
+`"properties":{`
 
-`		        "created":{`
+`"created":{`
 
-`		            "type":"date"`
+`"type":"date"`
 
-`		        },`
+`},`
 
-`		        "message":{`
+`"message":{`
 
-`		            "type":"keyword"`
+`"type":"keyword"`
 
-`		        }`
+`}`
 
-`    		}`
+`}`
 
-`		}`
+`}`
 
-`	}`
+`}`
 
 `}`
 
@@ -227,11 +229,11 @@ ES响应：
 
 `{`
 
-`    "acknowledged": true,`
+`"acknowledged": true,`
 
-`    "shards_acknowledged": true,`
+`"shards_acknowledged": true,`
 
-`    "index": "demo"`
+`"index": "demo"`
 
 `}`
 
@@ -239,59 +241,59 @@ ES响应：
 
 `{`
 
-`    "demo": {`
+`"demo": {`
 
-`        "aliases": {},`
+`"aliases": {},`
 
-`        "mappings": {`
+`"mappings": {`
 
-`            "example_type": {`
+`"example_type": {`
 
-`                "properties": {`
+`"properties": {`
 
-`                    "created": {`
+`"created": {`
 
-`                        "type": "date"`
+`"type": "date"`
 
-`                    },`
+`},`
 
-`                    "message": {`
+`"message": {`
 
-`                        "type": "keyword"`
+`"type": "keyword"`
 
-`                    }`
+`}`
 
-`                }`
+`}`
 
-`            }`
+`}`
 
-`        },`
+`},`
 
-`        "settings": {`
+`"settings": {`
 
-`            "index": {`
+`"index": {`
 
-`                "creation_date": "1561133726237",`
+`"creation_date": "1561133726237",`
 
-`                "number_of_shards": "5",`
+`"number_of_shards": "5",`
 
-`                "number_of_replicas": "1",`
+`"number_of_replicas": "1",`
 
-`                "uuid": "NUIzk_CkRh6L9z-_O1tVDQ",`
+`"uuid": "NUIzk_CkRh6L9z-_O1tVDQ",`
 
-`                "version": {`
+`"version": {`
 
-`                    "created": "5060099"`
+`"created": "5060099"`
 
-`                },`
+`},`
 
-`                "provided_name": "demo"`
+`"provided_name": "demo"`
 
-`            }`
+`}`
 
-`        }`
+`}`
 
-`    }`
+`}`
 
 `}`
 
@@ -299,7 +301,109 @@ ES响应：
 
 ## 文档Document
 
-插入文档
+### 插入文档
+
+系统定义`_id`
+
+`POST http://localhost:9200/demo/example_type`
+
+`{`
+
+`	"created":1561135459000,`
+
+`	"message":"test1"`
+
+`}`
+
+ES响应：
+
+`{`
+
+`    "_index": "demo",`
+
+`    "_type": "example_type",`
+
+`    "_id": "AWt67Ql_Tf0FgxupYlBX",`
+
+`    "_version": 1,`
+
+`    "result": "created",`
+
+`    "_shards": {`
+
+`        "total": 2,`
+
+`        "successful": 1,`
+
+`        "failed": 0`
+
+`    },`
+
+`    "created": true`
+
+`}`
+
+### 查询文档
+
+ElasticSearch的核心功能——搜索。
+
+`POST http://localhost:9200/demo/example_type/_search?pretty`
+
+ES响应：
+
+`{`
+
+`    "took": 183,`
+
+`    "timed_out": false,`
+
+`    "_shards": {`
+
+`        "total": 5,`
+
+`        "successful": 5,`
+
+`        "skipped": 0,`
+
+`        "failed": 0`
+
+`    },`
+
+`    "hits": {`
+
+`        "total": 1,`
+
+`        "max_score": 1,`
+
+`        "hits": [`
+
+`            {`
+
+`                "_index": "demo",`
+
+`                "_type": "example_type",`
+
+`                "_id": "AWt67Ql_Tf0FgxupYlBX",`
+
+`                "_score": 1,`
+
+`                "_source": {`
+
+`                    "created": 1561135459000,`
+
+`                    "message": "test1"`
+
+`                }`
+
+`            }`
+
+`        ]`
+
+`    }`
+
+`}`
+
+关于文档的查询是ElasticSearch的核心，后面的章节会详细介绍一些基本的简单查询和更为高级的复杂查询，此处仅作为对插入数据的验证，不做过多解释。
 
 
 
