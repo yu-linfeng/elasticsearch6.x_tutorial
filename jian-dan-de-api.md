@@ -309,9 +309,9 @@ ES响应：
 
 `{`
 
-`	"created":1561135459000,`
+`"created":1561135459000,`
 
-`	"message":"test1"`
+`"message":"test1"`
 
 `}`
 
@@ -319,27 +319,27 @@ ES响应：
 
 `{`
 
-`    "_index": "demo",`
+`"_index": "demo",`
 
-`    "_type": "example_type",`
+`"_type": "example_type",`
 
-`    "_id": "AWt67Ql_Tf0FgxupYlBX",`
+`"_id": "AWt67Ql_Tf0FgxupYlBX",`
 
-`    "_version": 1,`
+`"_version": 1,`
 
-`    "result": "created",`
+`"result": "created",`
 
-`    "_shards": {`
+`"_shards": {`
 
-`        "total": 2,`
+`"total": 2,`
 
-`        "successful": 1,`
+`"successful": 1,`
 
-`        "failed": 0`
+`"failed": 0`
 
-`    },`
+`},`
 
-`    "created": true`
+`"created": true`
 
 `}`
 
@@ -353,59 +353,131 @@ ES响应：
 
 `{`
 
-`    "took": 183,`
+`"took": 183,`
 
-`    "timed_out": false,`
+`"timed_out": false,`
 
-`    "_shards": {`
+`"_shards": {`
 
-`        "total": 5,`
+`"total": 5,`
 
-`        "successful": 5,`
+`"successful": 5,`
 
-`        "skipped": 0,`
+`"skipped": 0,`
 
-`        "failed": 0`
+`"failed": 0`
 
-`    },`
+`},`
 
-`    "hits": {`
+`"hits": {`
 
-`        "total": 1,`
+`"total": 1,`
 
-`        "max_score": 1,`
+`"max_score": 1,`
 
-`        "hits": [`
+`"hits": [`
 
-`            {`
+`{`
 
-`                "_index": "demo",`
+`"_index": "demo",`
 
-`                "_type": "example_type",`
+`"_type": "example_type",`
 
-`                "_id": "AWt67Ql_Tf0FgxupYlBX",`
+`"_id": "AWt67Ql_Tf0FgxupYlBX",`
 
-`                "_score": 1,`
+`"_score": 1,`
 
-`                "_source": {`
+`"_source": {`
 
-`                    "created": 1561135459000,`
+`"created": 1561135459000,`
 
-`                    "message": "test1"`
+`"message": "test1"`
 
-`                }`
+`}`
 
-`            }`
+`}`
 
-`        ]`
+`]`
+
+`}`
+
+`}`
+
+关于文档的查询是ElasticSearch的核心，后面的章节会详细介绍一些基本的简单查询和更为高级的复杂查询，此处仅作为对插入数据的验证，不做过多展开。
+
+### 修改文档
+
+`POST http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX/_update`
+
+`{`
+
+`    "doc":{`
+
+`        "message":"updated"`
 
 `    }`
 
 `}`
 
-关于文档的查询是ElasticSearch的核心，后面的章节会详细介绍一些基本的简单查询和更为高级的复杂查询，此处仅作为对插入数据的验证，不做过多解释。
+ES响应：
 
+`{`
 
+`    "_index": "demo",`
+
+`    "_type": "example_type",`
+
+`    "_id": "AWt67Ql_Tf0FgxupYlBX",`
+
+`    "_version": 2,`
+
+`    "result": "updated",`
+
+`    "_shards": {`
+
+`        "total": 2,`
+
+`        "successful": 1,`
+
+`        "failed": 0`
+
+`    }`
+
+`}`
+
+### 删除文档
+
+删除`_id`为AWt67Ql\_Tf0FgxupYlBX的文档
+
+`DELETE http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX`
+
+ES的响应：
+
+`{`
+
+`    "found": true,`
+
+`    "_index": "demo",`
+
+`    "_type": "example_type",`
+
+`    "_id": "AWt67Ql_Tf0FgxupYlBX",`
+
+`    "_version": 2,`
+
+`    "result": "deleted",`
+
+`    "_shards": {`
+
+`        "total": 2,`
+
+`        "successful": 1,`
+
+`        "failed": 0`
+
+`    }`
+
+`}`
 
 
 
