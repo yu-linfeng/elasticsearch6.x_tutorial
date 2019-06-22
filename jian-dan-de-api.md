@@ -453,31 +453,19 @@ ES响应：
 
 ES的响应：
 
-`{`
-
-`    "found": true,`
-
-`    "_index": "demo",`
-
-`    "_type": "example_type",`
-
-`    "_id": "AWt67Ql_Tf0FgxupYlBX",`
-
-`    "_version": 2,`
-
-`    "result": "deleted",`
-
-`    "_shards": {`
-
-`        "total": 2,`
-
-`        "successful": 1,`
-
-`        "failed": 0`
-
-`    }`
-
-`}`
-
-
+```json
+{
+    "found": true,
+    "_index": "demo",
+    "_type": "example_type",
+    "_id": "AWt67Ql_Tf0FgxupYlBX",
+    "_version": 2,
+    "result": "deleted",
+    "_shards": {
+        "total": 2,
+        "successful": 1,
+        "failed": 0
+    }
+}
+```
 
