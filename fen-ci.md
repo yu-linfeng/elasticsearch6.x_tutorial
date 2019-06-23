@@ -198,49 +198,6 @@ ES响应：
    ES响应：
 
    ```json
-   查看word索引结构  ```GET http://localhost:9200/word
-   ```
-
-   
-
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-执行以下HTTP请求创建名称为```/word/analyzer_demo```示例索引，它只包含一个字段name（类型为```text```）
-
-1. 创建word索引	```PUT http://localhost:9200/word```	
-
-2. 创建analyzer_demo类型已经定义映射Mapping
-
-3. ``````
-   PUT http://localhost:9200/word/analyzer_demo/_mapping
-   {
-   	"properties":{
-   		"name":{
-   			"type":"text"
-   		}
-   	}
-   }
-   ``````
-
-3. 查看word索引结构  ```GET http://localhost:9200/word```
-
-   ES响应：
-
-   ```json
    {
        "word": {
            "aliases": {},
@@ -248,17 +205,18 @@ ES响应：
                "analyzer_demo": {
                    "properties": {
                        "name": {
-                           "type": "text"
+                           "type": "text",
+                           "analyzer": "ik_smart"
                        }
                    }
                }
            },
            "settings": {
                "index": {
-                   "creation_date": "1561299959929",
+                   "creation_date": "1561304920088",
                    "number_of_shards": "5",
                    "number_of_replicas": "1",
-                   "uuid": "Vs--ik0CRICGEQeDHDpN1Q",
+                   "uuid": "A2YO9GpzRrGAIm2Q6rCoWA",
                    "version": {
                        "created": "5060099"
                    },
@@ -269,9 +227,4 @@ ES响应：
    }
    ```
 
-此时我们
-
-
-
-
-
+可以看到ES在对name字段进行分词时会采用```ik_smart```分词器。
