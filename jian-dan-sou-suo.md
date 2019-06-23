@@ -26,13 +26,13 @@ operator
 
 ```json
 {
-	"name":"kevin",
-	"age":25,
-	"sex":"男",
-	"address":"成都",
-	"created":1561272578000,
-	"modified":1561272578000,
-	"operator":"ylf"
+    "name":"kevin",
+    "age":25,
+    "sex":"男",
+    "address":"成都",
+    "created":1561272578000,
+    "modified":1561272578000,
+    "operator":"ylf"
 }
 ```
 
@@ -41,30 +41,28 @@ operator
 ```POST localhost:9200/user/student```
 
 ```json
-
 {
-	"name":"kangkang",
-	"age":26,
-	"sex":"男",
-	"address":"重庆",
-	"created":1561186351000,
-	"modified":1561186351000,
-	"operator":"ylf"
+    "name":"kangkang",
+    "age":26,
+    "sex":"男",
+    "address":"重庆",
+    "created":1561186351000,
+    "modified":1561186351000,
+    "operator":"ylf"
 }
-
 ```
 
 ```POST localhost:9200/user/student```
 
 ```json
 {
-	"name":"mike",
-	"age":22,
-	"sex":"男",
-	"address":"北京",
-	"created":1561272751000,
-	"modified":1561272751000,
-	"operator":"ylf"
+    "name":"mike",
+    "age":22,
+    "sex":"男",
+    "address":"北京",
+    "created":1561272751000,
+    "modified":1561272751000,
+    "operator":"ylf"
 }
 ```
 
@@ -618,7 +616,7 @@ ES响应：
     		}
     	},{
     		"term":{
-    			"address":"成都"
+    			"address.keyword":"成都"
     		}
     	}]
     }

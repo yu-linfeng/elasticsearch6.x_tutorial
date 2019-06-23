@@ -14,95 +14,73 @@ ES提供了多种操作数据的方式，其中较为常见的方式就是RESTfu
 
 创建一个名叫`demo`的索引：
 
-`PUT http://localhost:9200/demo`
+```PUT http://localhost:9200/demo```
 
 ES响应：
 
-`{`
-
-`"acknowledged": true,`
-
-`"shards_acknowledged": true,`
-
-`"index": "demo"`
-
-`}`
+```jso
+{
+    "acknowledged": true,
+    "shards_acknowledged": true,
+    "index": "demo"
+}
+```
 
 在创建索引时，可指定主分片和分片副本的数量：
 
-`PUT http://localhost:9200/demo`
+```PUT http://localhost:9200/demo```
 
-`{`
-
-`"settings":{`
-
-`"number_of_shards":1,`
-
-`"number_of_replicas":1`
-
-`}`
-
-`}`
+```json
+{
+    "settings":{
+        "number_of_shards":1,
+        "number_of_replicas":1
+    }
+}
+```
 
 ES响应：
 
-`{`
-
-`"acknowledged": true,`
-
-`"shards_acknowledged": true,`
-
-`"index": "demo"`
-
-`}`
+```jso
+{
+    "acknowledged": true,
+    "shards_acknowledged": true,
+    "index": "demo"
+}
+```
 
 ### 查看指定索引
 
-`GET http://localhost:9200/demo`
+```GET http://localhost:9200/demo```
 
 ES响应：
 
-`{`
-
-`"demo": {`
-
-`"aliases": {},`
-
-`"mappings": {},`
-
-`"settings": {`
-
-`"index": {`
-
-`"creation_date": "1561110747038",`
-
-`"number_of_shards": "1",`
-
-`"number_of_replicas": "1",`
-
-`"uuid": "kjPqDUt6TMyywg1P7qgccw",`
-
-`"version": {`
-
-`"created": "5060499"`
-
-`},`
-
-`"provided_name": "demo"`
-
-`}`
-
-`}`
-
-`}`
-
-`}`
+```json
+{
+    "demo": {
+        "aliases": {},
+        "mappings": {},
+        "settings": {
+            "index": {
+                "creation_date": "1561110747038",
+                "number_of_shards": "1",
+                "number_of_replicas": "1",
+                "uuid": "kjPqDUt6TMyywg1P7qgccw",
+                "version": {
+                    "created": "5060499"
+                }, 
+                "provided_name": "demo"
+            }
+        }
+    }
+}
+```
 
 ### 查询ES中的索引
 
 查询ES中索引情况：
 
-`GET http://localhost:9200/_cat/indices?v`
+```GET http://localhost:9200/_cat/indices?v```
 
 ES响应：
 
@@ -137,15 +115,15 @@ pri.store.size：主分片占用的大小
 
 删除`demo`索引，**删除索引等同于删库跑路，请谨慎操作。**
 
-`DELETE http://localhost:9200/demo`
+```DELETE http://localhost:9200/demo```
 
 ES响应：
 
-`{`
-
-`"acknowledged": true`
-
-`}`
+```json
+{
+    "acknowledged": true
+}
+```
 
 ## 类型Type（同时定义映射Mapping字段及类型）
 
@@ -157,145 +135,97 @@ ES响应：
 
 **方式一：**
 
-`PUT http://localhost:9200/demo/_mapping/example_type`
+```PUT http://localhost:9200/demo/_mapping/example_type```
 
 或
 
-`PUT http://localhost:9200/demo/example_type`
-
-`{`
-
-`"properties":{`
-
-`"created":{`
-
-`"type":"date"`
-
-`},`
-
-`"message":{`
-
-`"type":"keyword"`
-
-`}`
-
-`}`
-
-`}`
+```json
+PUT http://localhost:9200/demo/example_type
+{
+    "properties":{
+        "created":{
+            "type":"date"
+        },
+        "message":{
+            "type":"keyword"
+        }
+    }
+}
+```
 
 ES响应：
 
-`{`
+```json
+{
+    "acknowledged": true
+}
+```
 
-`"acknowledged": true`
-
-`}`
-
-此时再次执行查询索引的操作，已经可以发现类型Type被创建了，遗憾的是，如果类型Type（或者映射Mapping）一旦定义，就不能删除，只能修改，为了保证本教程顺利进行方式二创建类型，所以此处执行`DELETE http://localhost:9200/demo`删除索引。删除索引后不要再创建索引，下面的这种方式是在创建索引的同时创建Type并定义Mapping
+此时再次执行查询索引的操作，已经可以发现类型Type被创建了，遗憾的是，如果类型Type（或者映射Mapping）一旦定义，就不能删除，只能修改，为了保证本教程顺利进行方式二创建类型，所以此处执行```DELETE http://localhost:9200/demo```删除索引。删除索引后不要再创建索引，下面的这种方式是在创建索引的同时创建Type并定义Mapping
 
 **方式二：**
 
-`PUT http://localhost:9200/demo`
-
-`{`
-
-`"mappings":{`
-
-`"example_type":{`
-
-`"properties":{`
-
-`"created":{`
-
-`"type":"date"`
-
-`},`
-
-`"message":{`
-
-`"type":"keyword"`
-
-`}`
-
-`}`
-
-`}`
-
-`}`
-
-`}`
+```json
+PUT http://localhost:9200/demo
+{
+    "mappings":{
+        "example_type":{
+            "properties":{
+                "created":{
+                    "type":"date"
+                },
+                "message":{
+                    "type":"keyword"
+                }
+            }
+        }
+    }
+}
+```
 
 ES响应：
 
-`{`
+```json
+{
+    "acknowledged": true,
+    "shards_acknowledged": true,
+    "index": "demo"
+}
+```
 
-`"acknowledged": true,`
+此时执行```GET http://localhost:9200/demo```，会出现以下ES的响应：
 
-`"shards_acknowledged": true,`
-
-`"index": "demo"`
-
-`}`
-
-此时执行`GET http://localhost:9200/demo`，会出现以下ES的响应：
-
-`{`
-
-`"demo": {`
-
-`"aliases": {},`
-
-`"mappings": {`
-
-`"example_type": {`
-
-`"properties": {`
-
-`"created": {`
-
-`"type": "date"`
-
-`},`
-
-`"message": {`
-
-`"type": "keyword"`
-
-`}`
-
-`}`
-
-`}`
-
-`},`
-
-`"settings": {`
-
-`"index": {`
-
-`"creation_date": "1561133726237",`
-
-`"number_of_shards": "5",`
-
-`"number_of_replicas": "1",`
-
-`"uuid": "NUIzk_CkRh6L9z-_O1tVDQ",`
-
-`"version": {`
-
-`"created": "5060099"`
-
-`},`
-
-`"provided_name": "demo"`
-
-`}`
-
-`}`
-
-`}`
-
-`}`
+```jso
+{
+    "demo": {
+        "aliases": {},
+        "mappings": {
+            "example_type": {
+                "properties": {
+                    "created": {
+                        "type": "date"
+                    },
+                    "message": {
+                        "type": "keyword"
+                    }
+                }
+            }
+        },
+        "settings": {
+            "index": {
+                "creation_date": "1561133726237",
+                "number_of_shards": "5",
+                "number_of_replicas": "1",
+                "uuid": "NUIzk_CkRh6L9z-_O1tVDQ",
+                "version": {
+                    "created": "5060099"
+                },
+                "provided_name": "demo"
+            }
+        }
+    }
+}
+```
 
 可以看到我们在ES中创建了第一个索引以及创建的表结构，接下来插入就是数据（即文档）。
 
@@ -303,153 +233,108 @@ ES响应：
 
 ### 插入文档
 
-系统定义`_id`
+系统定义```_id```
 
-`POST http://localhost:9200/demo/example_type`
-
-`{`
-
-`"created":1561135459000,`
-
-`"message":"test1"`
-
-`}`
+```json
+POST http://localhost:9200/demo/example_type
+{
+    "created":1561135459000,
+    "message":"test1"
+}
+```
 
 ES响应：
 
-`{`
-
-`"_index": "demo",`
-
-`"_type": "example_type",`
-
-`"_id": "AWt67Ql_Tf0FgxupYlBX",`
-
-`"_version": 1,`
-
-`"result": "created",`
-
-`"_shards": {`
-
-`"total": 2,`
-
-`"successful": 1,`
-
-`"failed": 0`
-
-`},`
-
-`"created": true`
-
-`}`
+```json
+{
+    "_index": "demo",
+    "_type": "example_type",
+    "_id": "AWt67Ql_Tf0FgxupYlBX",
+    "_version": 1,
+    "result": "created",
+    "_shards": {
+        "total": 2,
+        "successful": 1,
+        "failed": 0
+    },
+    "created": true
+}
+```
 
 ### 查询文档
 
 ElasticSearch的核心功能——搜索。
 
-`POST http://localhost:9200/demo/example_type/_search?pretty`
+```POST http://localhost:9200/demo/example_type/_search?pretty```
 
 ES响应：
 
-`{`
-
-`"took": 183,`
-
-`"timed_out": false,`
-
-`"_shards": {`
-
-`"total": 5,`
-
-`"successful": 5,`
-
-`"skipped": 0,`
-
-`"failed": 0`
-
-`},`
-
-`"hits": {`
-
-`"total": 1,`
-
-`"max_score": 1,`
-
-`"hits": [`
-
-`{`
-
-`"_index": "demo",`
-
-`"_type": "example_type",`
-
-`"_id": "AWt67Ql_Tf0FgxupYlBX",`
-
-`"_score": 1,`
-
-`"_source": {`
-
-`"created": 1561135459000,`
-
-`"message": "test1"`
-
-`}`
-
-`}`
-
-`]`
-
-`}`
-
-`}`
+```json
+{
+    "took": 183,
+    "timed_out": false,
+    "_shards": {
+        "total": 5,
+        "successful": 5,
+        "skipped": 0,
+        "failed": 0
+    },
+    "hits": {
+        "total": 1,
+        "max_score": 1,
+        "hits": [
+            {
+                "_index": "demo",
+                "_type": "example_type",
+                "_id": "AWt67Ql_Tf0FgxupYlBX",
+                "_score": 1,
+                "_source": {
+                    "created": 1561135459000,
+                    "message": "test1"
+                }
+            }
+        ]
+    }
+}
+```
 
 关于文档的查询是ElasticSearch的核心，后面的章节会详细介绍一些基本的简单查询和更为高级的复杂查询，此处仅作为对插入数据的验证，不做过多展开。
 
 ### 修改文档
 
-`POST http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX/_update`
+根据文档```_id```修改
 
-`{`
-
-`    "doc":{`
-
-`        "message":"updated"`
-
-`    }`
-
-`}`
+```json
+POST http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX/_update
+{
+    "doc":{
+        "message":"updated"
+    }
+}
+```
 
 ES响应：
 
-`{`
-
-`    "_index": "demo",`
-
-`    "_type": "example_type",`
-
-`    "_id": "AWt67Ql_Tf0FgxupYlBX",`
-
-`    "_version": 2,`
-
-`    "result": "updated",`
-
-`    "_shards": {`
-
-`        "total": 2,`
-
-`        "successful": 1,`
-
-`        "failed": 0`
-
-`    }`
-
-`}`
+```json
+{
+    "_index": "demo",
+    "_type": "example_type",
+    "_id": "AWt67Ql_Tf0FgxupYlBX",
+    "_version": 2,
+    "result": "updated",
+    "_shards": {
+        "total": 2,
+        "successful": 1,
+        "failed": 0
+    }
+}
+```
 
 ### 删除文档
 
 删除`_id`为AWt67Ql\_Tf0FgxupYlBX的文档
 
-`DELETE http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX`
+```DELETE http://localhost:9200/demo/example_type/AWt67Ql_Tf0FgxupYlBX```
 
 ES的响应：
 
