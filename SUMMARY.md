@@ -6,4 +6,5 @@
 * [简单API](jian-dan-de-api.md)
 * [简单搜索](jian-dan-sou-suo.md)
 * [复杂搜索](fu-za-sou-suo.md)
+* [分词](fen-ci.md)
 
