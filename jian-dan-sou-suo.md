@@ -10,21 +10,48 @@
 
 首先创建一个名为user的Index，并创建一个student的Type，Mapping映射一共有如下几个字段：
 
-```
-name
-age
-sex
-address
-created
-modified
-operator
-```
+1. 创建名为user的Index    ```PUT http://localhost:9200/user```
 
-可以通过一个HTTP请求就能创建Index、Type、Mapping，以及写入数据。
+2. 创建名为student的Type，且指定字段name和address的分词器为```ik_smart```。
 
-```POST localhost:9200/user/student```
+   ```json
+   POST http://localhost:9200/user/student/_mapping
+   {
+   	"properties":{
+   		"name":{
+   			"type":"text",
+   			"analyzer":"ik_smart"
+   		},
+   		"age":{
+   			"type":"short"
+   		},
+   		"sex":{
+   			"type":"text"
+   		},
+   		"address":{
+   			"type":"text",
+   			"analyzer":"ik_smart"
+   		},
+   		"created":{
+   			"type":"date"
+   		},
+   		"modified":{
+   			"type":"date"
+   		},
+   		"operator":{
+   			"type":"text",
+   			"analyzer":"ik_smart"
+   		}
+   	}
+   }
+   ```
+
+经过上一章**分词**的学习我们把```text```类型都指定为```ik_smart```分词器。
+
+插入以下数据。
 
 ```json
+POST localhost:9200/user/student
 {
     "name":"kevin",
     "age":25,
@@ -36,11 +63,8 @@ operator
 }
 ```
 
-再执行上面的HTTP请求插入两条数据：
-
-```POST localhost:9200/user/student```
-
 ```json
+POST localhost:9200/user/student
 {
     "name":"kangkang",
     "age":26,
@@ -52,9 +76,8 @@ operator
 }
 ```
 
-```POST localhost:9200/user/student```
-
 ```json
+POST localhost:9200/user/student
 {
     "name":"mike",
     "age":22,
@@ -62,6 +85,32 @@ operator
     "address":"北京",
     "created":1561272751000,
     "modified":1561272751000,
+    "operator":"ylf"
+}
+```
+
+```json
+POST localhost:9200/user/student
+{
+    "name":"kevin2",
+    "age":26,
+    "sex":"男",
+    "address":"成都",
+    "created":1561272578000,
+    "modified":1561272578000,
+    "operator":"ylf"
+}
+```
+
+```jso
+POST localhost:9200/user/student
+{
+    "name":"kevin yu",
+    "age":21,
+    "sex":"男",
+    "address":"成都",
+    "created":1561272578000,
+    "modified":1561272578000,
     "operator":"ylf"
 }
 ```
@@ -74,77 +123,13 @@ operator
 
 查看索引user的student类型数据，得到刚刚插入的数据返回:
 
-```json
-{
-    "took": 10,
-    "timed_out": false,
-    "_shards": {
-        "total": 5,
-        "successful": 5,
-        "skipped": 0,
-        "failed": 0
-    },
-    "hits": {
-        "total": 3,
-        "max_score": 1,
-        "hits": [
-            {
-                "_index": "user",
-                "_type": "student",
-                "_id": "AWuDI7OQrDrjUjCfDce7",
-                "_score": 1,
-                "_source": {
-                    "name": "kangkang",
-                    "age": 26,
-                    "sex": "男",
-                    "address": "重庆",
-                    "created": 1561186351000,
-                    "modified": 1561186351000,
-                    "operator": "ylf"
-                }
-            },
-            {
-                "_index": "user",
-                "_type": "student",
-                "_id": "AWuDGVMYrDrjUjCfDce3",
-                "_score": 1,
-                "_source": {
-                    "name": "kevin",
-                    "age": 25,
-                    "sex": "男",
-                    "address": "成都",
-                    "created": 1561272578000,
-                    "modified": 1561272578000,
-                    "operator": "ylf"
-                }
-            },
-            {
-                "_index": "user",
-                "_type": "student",
-                "_id": "AWuDI53brDrjUjCfDce6",
-                "_score": 1,
-                "_source": {
-                    "name": "mike",
-                    "age": 22,
-                    "sex": "男",
-                    "address": "北京",
-                    "created": 1561272751000,
-                    "modified": 1561272751000,
-                    "operator": "ylf"
-                }
-            }
-        ]
-    }
-}
-```
-
 ### 单条件搜索
 
 ES查询主要分为```term```精确搜索、```match```模糊搜索。
 
 #### term精确搜索
 
-我们用```term```搜索name为“kevin”的数据（为了更为什么理解```term```精确查询，此处我们按上文数据准备中的插入API插入一条name=kevin2的数据）。
+我们用```term```搜索name为“kevin”的数据。
 
 ```json
 POST http://localhost:9200/user/student/_search?pretty
@@ -157,41 +142,26 @@ POST http://localhost:9200/user/student/_search?pretty
 }
 ```
 
-ES响应：
+既然```term```是精确搜索，按照非关系型数据库的理解来讲就等同于```=```，那么搜索结果也应该只包含1条数据。然而出乎意料的是，搜索结果出现了两条数据：name="kevin"和name="keivin yu"，这看起来似乎是进行的模糊搜索，但又没有搜索出name="kevin2"的数据。我们先继续观察```match```的搜索结果。
+
+#### match模糊搜索
+
+同样，搜索name为“kevin”的数据。
 
 ```json
+POST http://localhost:9200/user/student/_search?pretty
 {
-    "took": 5,
-    "timed_out": false,
-    "_shards": {
-        "total": 5,
-        "successful": 5,
-        "skipped": 0,
-        "failed": 0
-    },
-    "hits": {
-        "total": 1,
-        "max_score": 0.6931472,
-        "hits": [
-            {
-                "_index": "user",
-                "_type": "student",
-                "_id": "AWuDGVMYrDrjUjCfDce3",
-                "_score": 0.6931472,
-                "_source": {
-                    "name": "kevin",
-                    "age": 25,
-                    "sex": "男",
-                    "address": "成都",
-                    "created": 1561272578000,
-                    "modified": 1561272578000,
-                    "operator": "ylf"
-                }
-            }
-        ]
+    "query":{
+        "match":{
+            "name":"kevin"
+        }
     }
 }
 ```
+
+```match```的搜索结果竟然仍然是两条数据：name="kevin"和name="keivin yu"。同样，name="kevin2"也没有出现在搜索结果中。
+
+
 
 从结果可以看到，```term```查询就是SQL语句中的```=```。
 
