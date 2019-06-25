@@ -94,9 +94,9 @@ ES响应：
 
 ### ik插件安装
 
-ik下载地址（直接下载编译好了的zip文件，需要和ES版本一致）：[https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v5.6.0](https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v5.6.4)。ik历史版本下载页面：[https://github.com/medcl/elasticsearch-analysis-ik/releases](https://github.com/medcl/elasticsearch-analysis-ik/releases)。
+ik下载地址（直接下载编译好了的zip文件，需要和ES版本一致）：[https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v6.3.2](https://github.com/medcl/elasticsearch-analysis-ik/releases/tag/v6.3.2)。ik历史版本下载页面：[https://github.com/medcl/elasticsearch-analysis-ik/releases](https://github.com/medcl/elasticsearch-analysis-ik/releases)。
 
-下载完成后解压```elasticsearch-analysis-ik-5.6.0.zip```将解压后的文件夹直接放入ES安装目录下的```plugins```文件夹中，重启ES。
+下载完成后解压```elasticsearch-analysis-ik-6.3.2.zip```将解压后的文件夹直接放入ES安装目录下的```plugins```文件夹中，重启ES。
 
 使用ik插件的```ik_smart```分词器：
 
