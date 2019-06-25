@@ -7,4 +7,5 @@
 * [分词](fen-ci.md)
 * [简单搜索](jian-dan-sou-suo.md)
 * [复杂搜索](fu-za-sou-suo.md)
+* [父-子关系文档](7236-zi-guan-xi-wen-dang.md)
 
