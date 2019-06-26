@@ -14,9 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class SpringDataElasticsearchApplicationTests {
 
     @Autowired
-    private StudentService studentService;
-
-    @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
     @Test
