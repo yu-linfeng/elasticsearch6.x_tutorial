@@ -1,0 +1,17 @@
+{
+  "properties":{
+    "name":{
+      "type":"text",
+      "analyzer":"ik_smart",
+      "fields":{
+        "keyword":{
+          "type":"keyword",
+          "ignore_above":256
+        }
+      }
+    },
+    "age":{
+      "type":"integer"
+    }
+  }
+}
