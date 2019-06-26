@@ -91,7 +91,9 @@ public class SpringDataElasticsearchApplicationTests {
 }
 ```
 
-使用```POST 
+使用```GET http://localhost:9200/user```请求命令，可看到通过```Spring Data ElasticSearch```创建的索引。
+
+
 
 ## TransportClient
 
