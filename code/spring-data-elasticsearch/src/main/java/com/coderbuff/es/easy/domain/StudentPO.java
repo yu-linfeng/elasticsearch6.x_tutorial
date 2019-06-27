@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 import org.springframework.data.elasticsearch.annotations.Mapping;
 
 import java.io.Serializable;
@@ -20,7 +22,6 @@ import java.io.Serializable;
 @Mapping(mappingPath = "student_mapping.json")
 public class StudentPO implements Serializable {
 
-    @Id
     private String id;
 
     /**

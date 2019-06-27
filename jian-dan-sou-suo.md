@@ -158,7 +158,7 @@ POST http://localhost:9200/user/student/_search
 }
 ```
 
-返回一条name="kevin yu"的数据。同理按照```match```搜索则不会出现任何结果。
+返回一条name="kevin yu"的数据。按照```match```搜索同样出现name="kevin yu"，因为name.keyword无论如何都不会再分词。
 
 _在已经建立索引且定义好映射Mapping的情况下，如果直接修改name字段，此时能修改成功，但是却无法进行查询，这与ES底层实现有关，如果一定要修改要么是新增字段，要么是重建索引。_
 
@@ -181,73 +181,7 @@ POST http://localhost:9200/user/student/_search?pretty
 }
 ```
 
-ES响应：
-
-```json
-{
-    "took": 104,
-    "timed_out": false,
-    "_shards": {
-        "total": 5,
-        "successful": 5,
-        "skipped": 0,
-        "failed": 0
-    },
-    "hits": {
-        "total": 3,
-        "max_score": 1,
-        "hits": [
-            {
-                "_index": "user",
-                "_type": "student",
-                "_id": "AWuDOpofrDrjUjCfDce-",
-                "_score": 1,
-                "_source": {
-                    "name": "kevin2",
-                    "age": 25,
-                    "sex": "男",
-                    "address": "成都",
-                    "created": 1561274770000,
-                    "modified": 1561274770000,
-                    "operator": "ylf"
-                }
-            },
-            {
-                "_index": "user",
-                "_type": "student",
-                "_id": "AWuDGVMYrDrjUjCfDce3",
-                "_score": 1,
-                "_source": {
-                    "name": "kevin",
-                    "age": 25,
-                    "sex": "男",
-                    "address": "成都",
-                    "created": 1561272578000,
-                    "modified": 1561272578000,
-                    "operator": "ylf"
-                }
-            },
-            {
-                "_index": "user",
-                "_type": "student",
-                "_id": "AWuDRO2VrDrjUjCfDcfA",
-                "_score": 1,
-                "_source": {
-                    "name": "kevin yu",
-                    "age": 23,
-                    "sex": "男",
-                    "address": "成都",
-                    "created": 1561275440000,
-                    "modified": 1561275440000,
-                    "operator": "ylf"
-                }
-            }
-        ]
-    }
-}
-```
-
-可以看到，ES搜索结果中出现了包含”kevin“的name文档。
+ES返回结果包括name="kevin"，name="kevin2"，name="kevin yu"。
 
 #### fuzzy更智能的模糊搜索
 
@@ -264,56 +198,7 @@ POST http://localhost:9200/user/student/_search?pretty
 }
 ```
 
-ES响应：
-
-```json
-{
-    "took": 8,
-    "timed_out": false,
-    "_shards": {
-        "total": 5,
-        "successful": 5,
-        "skipped": 0,
-        "failed": 0
-    },
-    "hits": {
-        "total": 2,
-        "max_score": 0.55451775,
-        "hits": [
-            {
-                "_index": "user",
-                "_type": "student",
-                "_id": "AWuDGVMYrDrjUjCfDce3",
-                "_score": 0.55451775,
-                "_source": {
-                    "name": "kevin",
-                    "age": 25,
-                    "sex": "男",
-                    "address": "成都",
-                    "created": 1561272578000,
-                    "modified": 1561272578000,
-                    "operator": "ylf"
-                }
-            },
-            {
-                "_index": "user",
-                "_type": "student",
-                "_id": "AWuDRO2VrDrjUjCfDcfA",
-                "_score": 0.20649284,
-                "_source": {
-                    "name": "kevin yu",
-                    "age": 23,
-                    "sex": "男",
-                    "address": "成都",
-                    "created": 1561275440000,
-                    "modified": 1561275440000,
-                    "operator": "ylf"
-                }
-            }
-        ]
-    }
-}
-```
+ES返回结果包括name="kevin"，name="kevin yu"。
 
 ### 多条件搜索
 
@@ -558,5 +443,5 @@ POST http://localhost:9200/user/student/_search?pretty
 }
 ```
 
-ES默认升序排列，如果不指定排序字段的排序，则```sort```字段可直接写为```"sort":"age"```。
+ES默认升序排列，如果不指定排序字段的排序），则```sort```字段可直接写为```"sort":"age"```。
 

@@ -1,5 +1,8 @@
 {
   "properties":{
+    "id":{
+      "type":"keyword"
+    },
     "name":{
       "type":"text",
       "analyzer":"ik_smart",
