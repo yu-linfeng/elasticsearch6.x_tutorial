@@ -16,9 +16,9 @@ import java.util.concurrent.ExecutionException;
 public abstract class AbstractElasticSearchDao implements ElasticSearchDao {
 
     @Autowired
-    private ElasticSearchClient elasticSearchClient;
+    protected ElasticSearchClient elasticSearchClient;
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
+    protected static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Override
     public void createIndex(String index) {
