@@ -1,5 +1,6 @@
 package com.coderbuff.transportclientelasticsearch.easy.service;
 
+import com.coderbuff.transportclientelasticsearch.common.Page;
 import com.coderbuff.transportclientelasticsearch.easy.dao.StudentRepository;
 import com.coderbuff.transportclientelasticsearch.easy.domain.StudentPO;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -35,5 +36,12 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentPO> search(SearchRequestBuilder searchRequestBuilder) {
         return studentRepository.search(searchRequestBuilder);
+    }
+
+    @Override
+    public Page<StudentPO> searchWithPage(SearchRequestBuilder searchRequestBuilder) {
+        List<StudentPO> studentPOList = studentRepository.search(searchRequestBuilder);
+        Page<StudentPO> result = Page.build((long) studentPOList.size(), studentPOList);
+        return result;
     }
 }

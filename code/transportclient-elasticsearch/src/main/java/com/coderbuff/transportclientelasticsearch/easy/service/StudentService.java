@@ -1,5 +1,6 @@
 package com.coderbuff.transportclientelasticsearch.easy.service;
 
+import com.coderbuff.transportclientelasticsearch.common.Page;
 import com.coderbuff.transportclientelasticsearch.easy.domain.StudentPO;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 
@@ -34,4 +35,10 @@ public interface StudentService {
      */
     List<StudentPO> search(SearchRequestBuilder searchRequestBuilder);
 
+    /**
+     * 分页查询
+     * @param searchRequestBuilder 查询条件
+     * @return Page
+     */
+    Page<StudentPO> searchWithPage(SearchRequestBuilder searchRequestBuilder);
 }

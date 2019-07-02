@@ -1,5 +1,6 @@
 package com.coderbuff.transportclientelasticsearch;
 
+import com.coderbuff.transportclientelasticsearch.common.Page;
 import com.coderbuff.transportclientelasticsearch.config.ElasticSearchClient;
 import com.coderbuff.transportclientelasticsearch.easy.dao.StudentRepository;
 import com.coderbuff.transportclientelasticsearch.easy.domain.StudentPO;
@@ -13,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -234,6 +236,46 @@ public class TransportClientElasticsearchApplicationTests {
                         .mustNot(QueryBuilders.existsQuery("name")));
         List<StudentPO> studentPOList = studentService.search(searchRequestBuilder);
         System.out.println(studentPOList);
+    }
+
+    /**
+     * 分页match查询name=kevin且按id排序（默认升序）
+     * 期待结果：name=kevin
+     */
+    @Test
+    public void testMatchQueryPageableSearch() {
+        int from = 0;
+        int size = 1;
+        SearchRequestBuilder searchRequestBuilder = elasticSearchClient.getClient()
+                .prepareSearch("user")
+                .setQuery(QueryBuilders.matchQuery("name", "kevin"))
+                .addSort("id", SortOrder.ASC)
+                .setFrom(from)
+                .setSize(size);
+        Page<StudentPO> result = studentService.searchWithPage(searchRequestBuilder);
+        result.setPage(from + 1);
+        result.setPageSize(size);
+        System.out.println(result);
+    }
+
+    /**
+     * 分页range范围查询age>=21且age<26，并按age降序排列
+     * 期待结果：name=kevin2
+     */
+    @Test
+    public void testMatchQueryPageableDescSearch() {
+        int from = 0;
+        int size = 1;
+        SearchRequestBuilder searchRequestBuilder = elasticSearchClient.getClient()
+                .prepareSearch("user")
+                .setQuery(QueryBuilders.rangeQuery("age").gte("21").lt(26))
+                .addSort("age", SortOrder.DESC)
+                .setFrom(from)
+                .setSize(size);
+        Page<StudentPO> result = studentService.searchWithPage(searchRequestBuilder);
+        result.setPage(from + 1);
+        result.setPageSize(size);
+        System.out.println(result);
     }
 }
 
