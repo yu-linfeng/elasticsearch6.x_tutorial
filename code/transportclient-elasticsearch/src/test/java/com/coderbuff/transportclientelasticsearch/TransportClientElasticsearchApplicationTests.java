@@ -6,6 +6,9 @@ import com.coderbuff.transportclientelasticsearch.easy.domain.StudentPO;
 import com.coderbuff.transportclientelasticsearch.easy.service.StudentService;
 import com.google.common.collect.Lists;
 import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.common.xcontent.XContentFactory;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Assert;
@@ -15,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.io.IOException;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -27,6 +31,26 @@ public class TransportClientElasticsearchApplicationTests {
     @Autowired
     private ElasticSearchClient elasticSearchClient;
 
+    /**
+     * 测试创建Index，type和Mapping定义
+     */
+    @Test
+    public void createIndex() {
+        try {
+            TransportClient  client = elasticSearchClient.getClient();
+            XContentBuilder mapping = XContentFactory.jsonBuilder()
+                    .startObject()
+                    .startObject("properties") //设置之定义字段
+                    .startObject("id").field("type","keyword").endObject()
+                    .startObject("name").field("type","text").field("analyzer","ik_smart").startObject("fields").startObject("keyword").field("type", "keyword").field("ignore_above", "256").endObject().endObject().endObject()
+                    .startObject("age").field("type","integer").endObject()
+                    .endObject()
+                    .endObject();
+            client.admin().indices().prepareCreate("user").addMapping("student", mapping).execute().actionGet();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     /**
      * 测试批量插入
      */
