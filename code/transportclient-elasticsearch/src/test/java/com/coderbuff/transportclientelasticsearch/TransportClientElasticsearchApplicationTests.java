@@ -2,19 +2,16 @@ package com.coderbuff.transportclientelasticsearch;
 
 import com.coderbuff.transportclientelasticsearch.common.Page;
 import com.coderbuff.transportclientelasticsearch.config.ElasticSearchClient;
-import com.coderbuff.transportclientelasticsearch.easy.dao.StudentRepository;
 import com.coderbuff.transportclientelasticsearch.easy.domain.StudentPO;
 import com.coderbuff.transportclientelasticsearch.easy.service.StudentService;
+import com.google.common.collect.Lists;
 import org.elasticsearch.action.search.SearchRequestBuilder;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -30,6 +27,43 @@ public class TransportClientElasticsearchApplicationTests {
     @Autowired
     private ElasticSearchClient elasticSearchClient;
 
+    /**
+     * 测试批量插入
+     */
+    @Test
+    public void testBatchInsert() {
+        List<StudentPO> studentPOList = Lists.newArrayList();
+        StudentPO studentPO1 = new StudentPO();
+        studentPO1.setId("1");
+        studentPO1.setName("kevin");
+        studentPO1.setAge(25);
+
+        StudentPO studentPO2 = new StudentPO();
+        studentPO2.setId("2");
+        studentPO2.setName("kangkang");
+        studentPO2.setAge(26);
+
+        StudentPO studentPO3 = new StudentPO();
+        studentPO3.setId("3");
+        studentPO3.setName("mike");
+        studentPO3.setAge(22);
+
+        StudentPO studentPO4 = new StudentPO();
+        studentPO4.setId("4");
+        studentPO4.setName("kevin2");
+        studentPO4.setAge(25);
+
+        StudentPO studentPO5 = new StudentPO();
+        studentPO5.setId("5");
+        studentPO5.setName("kevin yu");
+        studentPO5.setAge(21);
+        studentPOList.add(studentPO1);
+        studentPOList.add(studentPO2);
+        studentPOList.add(studentPO3);
+        studentPOList.add(studentPO4);
+        studentPOList.add(studentPO5);
+        studentService.batchInsertStudentPO(Lists.newArrayList(studentPOList));
+    }
 
     /**
      * 无条件不分页按ID排序全量查询

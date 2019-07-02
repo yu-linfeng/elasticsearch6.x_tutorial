@@ -2,7 +2,6 @@ package com.coderbuff.transportclientelasticsearch.easy.dao;
 
 import com.coderbuff.transportclientelasticsearch.common.AbstractElasticSearchDao;
 import com.coderbuff.transportclientelasticsearch.easy.domain.StudentPO;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by OKevin on 2019-06-30 13:54
@@ -30,10 +30,13 @@ public class StudentRepository extends AbstractElasticSearchDao {
         BulkRequestBuilder bulkRequest = elasticSearchClient.getClient().prepareBulk();
         try {
             for (StudentPO student : studentPOList) {
-                bulkRequest.add(elasticSearchClient.getClient().prepareIndex("user", "student").setSource(MAPPER.writeValueAsString(student)));
+                String json = MAPPER.writeValueAsString(student);
+                bulkRequest.add(elasticSearchClient.getClient().prepareIndex("user", "student").setSource(MAPPER.readValue(json, Map.class))).get();
             }
-        } catch (JsonProcessingException e) {
+        } catch (IOException e) {
             log.error("json parse error!", e);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }
 
