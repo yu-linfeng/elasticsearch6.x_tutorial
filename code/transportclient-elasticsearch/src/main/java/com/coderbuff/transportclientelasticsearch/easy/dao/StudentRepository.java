@@ -31,7 +31,7 @@ public class StudentRepository extends AbstractElasticSearchDao {
         try {
             for (StudentPO student : studentPOList) {
                 String json = MAPPER.writeValueAsString(student);
-                bulkRequest.add(elasticSearchClient.getClient().prepareIndex("user", "student").setSource(MAPPER.readValue(json, Map.class))).get();
+                bulkRequest.add(elasticSearchClient.getClient().prepareIndex("user", "student").setId(student.getId()).setSource(MAPPER.readValue(json, Map.class))).get();
             }
         } catch (IOException e) {
             log.error("json parse error!", e);
@@ -58,7 +58,11 @@ public class StudentRepository extends AbstractElasticSearchDao {
      * @param studentPOList StudentPO List
      */
     public void batchDelete(List<StudentPO> studentPOList) {
-
+        for (StudentPO studentPO : studentPOList) {
+            elasticSearchClient.getClient()
+                    .prepareDelete("user", "student", studentPO.getId())
+                    .execute().actionGet();
+        }
     }
 
     public List<StudentPO> search(SearchRequestBuilder searchRequestBuilder) {

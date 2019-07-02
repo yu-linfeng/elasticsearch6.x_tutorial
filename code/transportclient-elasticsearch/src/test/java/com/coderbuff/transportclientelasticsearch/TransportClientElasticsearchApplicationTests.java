@@ -311,6 +311,16 @@ public class TransportClientElasticsearchApplicationTests {
         result.setPageSize(size);
         System.out.println(result);
     }
+
+    /**
+     * 测试批量删除
+     */
+    @Test
+    public void testBatchDelete() {
+        StudentPO studentPO = new StudentPO();
+        studentPO.setId("3");
+        studentService.batchDeleteStudentPO(Lists.newArrayList(studentPO));
+    }
 }
 
 
