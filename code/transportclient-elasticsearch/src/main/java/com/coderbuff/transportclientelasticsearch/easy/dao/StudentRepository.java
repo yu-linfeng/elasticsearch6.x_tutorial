@@ -45,11 +45,16 @@ public class StudentRepository extends AbstractElasticSearchDao {
      * @param studentPOList StudentPO List
      */
     public void batchUpdate(List<StudentPO> studentPOList) {
-        for (StudentPO student : studentPOList) {
-            /*UpdateRequest updateRequest = new UpdateRequestBuilder()
-                    .setIndex("user")
-                    .setType("student")
-                    .setId(student.getId())*/
+        try {
+            for (StudentPO student : studentPOList) {
+                String json = MAPPER.writeValueAsString(student);
+                elasticSearchClient.getClient().prepareUpdate("user", "student", student.getId())
+                        .setDoc(MAPPER.readValue(json, Map.class)).execute().actionGet();
+            }
+        } catch (IOException e) {
+            log.error("json parse error!", e);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
         }
     }
 

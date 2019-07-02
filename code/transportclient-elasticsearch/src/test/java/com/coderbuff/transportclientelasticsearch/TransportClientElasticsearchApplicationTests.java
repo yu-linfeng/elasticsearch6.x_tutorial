@@ -313,6 +313,18 @@ public class TransportClientElasticsearchApplicationTests {
     }
 
     /**
+     * 测试批量更新
+     */
+    @Test
+    public void testBatchUpdate() {
+        StudentPO studentPO = new StudentPO();
+        studentPO.setId("4");
+        studentPO.setName("kevin2");
+        studentPO.setAge(1);
+        studentService.batchUpdateStudentPO(Lists.newArrayList(studentPO));
+    }
+
+    /**
      * 测试批量删除
      */
     @Test
