@@ -140,5 +140,7 @@ SearchQuery searchQuery = new NativeSearchQueryBuilder()
 
 ## TransportClient
 
+ES的Java API非常广泛，一种操作可能会有好几种写法。Spring Data ElasticSearch实际上是对ES Java API的再次封装，从使用上将更加简单。
 
+本节请直接对照代码学习使用，如果要讲解ES的Java API那将是一个十分庞大的工作，[https://github.com/yu-linfeng/elasticsearch6.x_tutorial/tree/master/code/transportclient-elasticsearch](https://github.com/yu-linfeng/elasticsearch6.x_tutorial/tree/master/code/transportclient-elasticsearch)
 

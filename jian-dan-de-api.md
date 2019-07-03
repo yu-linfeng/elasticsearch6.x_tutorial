@@ -135,12 +135,9 @@ ES响应：
 
 **方式一：**
 
-```PUT http://localhost:9200/demo/_mapping/example_type```
-
-或
-
 ```json
-PUT http://localhost:9200/demo/example_type
+PUT http://localhost:9200/demo/_mapping/example_type
+
 {
     "properties":{
         "created":{
@@ -150,14 +147,6 @@ PUT http://localhost:9200/demo/example_type
             "type":"keyword"
         }
     }
-}
-```
-
-ES响应：
-
-```json
-{
-    "acknowledged": true
 }
 ```
 
@@ -183,51 +172,7 @@ PUT http://localhost:9200/demo
 }
 ```
 
-ES响应：
-
-```json
-{
-    "acknowledged": true,
-    "shards_acknowledged": true,
-    "index": "demo"
-}
-```
-
-此时执行```GET http://localhost:9200/demo```，会出现以下ES的响应：
-
-```jso
-{
-    "demo": {
-        "aliases": {},
-        "mappings": {
-            "example_type": {
-                "properties": {
-                    "created": {
-                        "type": "date"
-                    },
-                    "message": {
-                        "type": "keyword"
-                    }
-                }
-            }
-        },
-        "settings": {
-            "index": {
-                "creation_date": "1561133726237",
-                "number_of_shards": "5",
-                "number_of_replicas": "1",
-                "uuid": "NUIzk_CkRh6L9z-_O1tVDQ",
-                "version": {
-                    "created": "5060099"
-                },
-                "provided_name": "demo"
-            }
-        }
-    }
-}
-```
-
-可以看到我们在ES中创建了第一个索引以及创建的表结构，接下来插入就是数据（即文档）。
+此时执行```GET http://localhost:9200/demo```，可以看到我们在ES中创建了第一个索引以及创建的表结构，接下来插入就是数据（即文档）。
 
 ## 文档Document
 
