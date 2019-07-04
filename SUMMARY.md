@@ -2,7 +2,7 @@
 
 * [写在前面的话](README.md)
 * [准备工作](chapter1.md)
-* [基本术语](ji-ben-zhu-yu.md)
+* [基本术语](chapter2.md)
 * [简单API](jian-dan-de-api.md)
 * [分词](fen-ci.md)
 * [简单搜索](jian-dan-sou-suo.md)
