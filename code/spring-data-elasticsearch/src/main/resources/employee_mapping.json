@@ -1,0 +1,62 @@
+{
+  "properties": {
+    "id": {
+      "type": "keyword"
+    },
+    "name": {
+      "type": "text",
+      "analyzer": "ik_smart",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 256
+        }
+      }
+    },
+    "sex": {
+      "type": "keyword"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "birthday": {
+      "type": "date"
+    },
+    "position": {
+      "type": "text",
+      "analyzer": "ik_smart",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 256
+        }
+      }
+    },
+    "level": {
+      "type": "join",
+      "relations": {
+        "superior": "staff",
+        "staff": "junior"
+      }
+    },
+    "departments": {
+      "type": "text",
+      "analyzer": "ik_smart",
+      "fields": {
+        "keyword": {
+          "type": "keyword",
+          "ignore_above": 256
+        }
+      }
+    },
+    "joinTime": {
+      "type": "date"
+    },
+    "modified": {
+      "type": "date"
+    },
+    "created": {
+      "type": "date"
+    }
+  }
+}

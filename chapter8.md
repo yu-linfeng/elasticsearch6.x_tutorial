@@ -69,7 +69,7 @@ PUT http://localhost:9200/company
 						}
 					}
 				},
-				"join_time":{
+				"joinTime":{
 					"type":"date"
 				},
 				"modified":{
@@ -118,7 +118,7 @@ POST http://localhost:9200/company/employee/1?routing=1
 	"level":{
     "name":"superior"
   },
-	"join_time":"1990-01-01",
+	"joinTime":"1990-01-01",
 	"modified":"1562167817000",
 	"created":"1562167817000"
 }
@@ -138,7 +138,7 @@ POST http://localhost:9200/company/employee/2?routing=1
     "parent":"1"
   },
   "departments":["市场部","研发部"],
-	"join_time":"2001-02-02",
+	"joinTime":"2001-02-02",
 	"modified":"1562167817000",
 	"created":"1562167817000"
 }
@@ -158,7 +158,7 @@ POST http://localhost:9200/company/employee/3?routing=1
     "parent":"2"
   },
   "departments":["市场部"],
-	"join_time":"2010-07-01",
+	"joinTime":"2010-07-01",
 	"modified":"1562167817000",
 	"created":"1562167817000"
 }
@@ -178,7 +178,7 @@ POST http://localhost:9200/company/employee/4?routing=1
     "parent":"2"
   },
   "departments":["市场部"],
-	"join_time":"2010-08-08",
+	"joinTime":"2010-08-08",
 	"modified":"1562167817000",
 	"created":"1562167817000"
 }
@@ -198,7 +198,7 @@ POST http://localhost:9200/company/employee/5?routing=1
     "parent":"2"
   },
   "departments":["研发部"],
-	"join_time":"2016-07-01",
+	"joinTime":"2016-07-01",
 	"modified":"1562167817000",
 	"created":"1562167817000"
 }
@@ -218,7 +218,7 @@ POST http://localhost:9200/company/employee/6?routing=1
     "parent":"2"
   },
   "departments":["研发部"],
-	"join_time":"2018-03-10",
+	"joinTime":"2018-03-10",
 	"modified":"1562167817000",
 	"created":"1562167817000"
 }
