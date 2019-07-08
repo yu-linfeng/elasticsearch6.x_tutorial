@@ -496,6 +496,9 @@ PUT http://localhost:9200/ware_index
 	"mappings":{
 		"ware":{
 			"properties":{
+        "id":{
+          "type":"keyword"
+        },
 				"title":{
 					"type":"text",
 					"analyzer":"ik_smart"
@@ -511,6 +514,7 @@ PUT http://localhost:9200/ware_index
 ```json
 POST http://localhost:9200/ware_index/ware
 {
+    "id":"1",
   	"title":"新希望牛奶"
 }
 ```
@@ -518,6 +522,7 @@ POST http://localhost:9200/ware_index/ware
 ```json
 POST http://localhost:9200/ware_index/ware
 {
+    "id":"2",
     "title":"春秋上新短袖"
 }
 ```
