@@ -1,15 +1,12 @@
 package com.coderbuff.logstash;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
 /**
- * @author cdyulinfeng
- * @date 2019/7/10
- **/
+ * Created by OKevin on 2019-07-09 23:49
+ */
 @Slf4j
 @Component
 public class LogstashDemo implements InitializingBean {
