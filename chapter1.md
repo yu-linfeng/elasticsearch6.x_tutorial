@@ -10,17 +10,9 @@ ElasticSearch6.3.2下载地址（Linux、mac OS、Windows通用，下载zip包�
 
 ### Linux
 
-ES需要使用普通用户安装、启动，如果你是root用户，需要先创建一个用户，暂且取名“elastic”。
+在上述下载地址下载完elasticsearch-6.3.2.tar.gz后，首先在当前登录用户的```home```下创建一个```Settings```目录，通过```tar -zxvf elasticsearch-6.3.2.tar.gz```解压到当前目录。
 
-### mac OS
-
-mac OS的安装过程和Linux类似，
-
-### Windows
-
-本教程的系统环境为Linux或mac OS。
-
-进入ES目录执行`./bin/elasticsearch`命令，通过浏览器访问`http://localhost:9200/?pretty`出现以下响应：
+进入```elasticsearch-6.3.2.tar.gz```目录，执行```./bin/elasticsearch```命令，等待一小段时间，通过浏览器访问`http://localhost:9200/?pretty`出现以下响应：
 
 ```json
 {              
@@ -38,6 +30,8 @@ mac OS的安装过程和Linux类似，
 }
 ```
 
-运行正常。
+**ES需要使用普通用户安装、启动，如果你是root用户，需要先创建一个用户，用普通用户而不是root用户启动ES。**
 
-ES已经安装完成，已经可以开始对它一顿操作。
+### mac OS
+
+mac OS的安装过程和Linux相同。
