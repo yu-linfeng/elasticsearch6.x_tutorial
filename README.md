@@ -1,6 +1,10 @@
 # 写在前面的话
 
-[查看教程](https://yulinfeng.gitbooks.io/elasticsearch/content/)
+[查看在线教程](https://yulinfeng.gitbooks.io/elasticsearch/content/)
+
+[下载完整教程]([https://github.com/yu-linfeng/elasticsearch6.x_tutorial/blob/master/ElasticSearch6.x%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B.pdf](https://github.com/yu-linfeng/elasticsearch6.x_tutorial/blob/master/ElasticSearch6.x实战教程.pdf))
+
+[GitHub仓库](https://github.com/yu-linfeng/elasticsearch6.x_tutorial)
 
 这个教程虽然名字叫做《ElasticSearch6.x实战教程》但实际上离“实战”，离“教程”还相去甚远。原本是打算基于ElasticSearch5.x，但写到“父-子关系文档”一章时发现5.x与6.x在父子文档关系上完全不同，其根本原因在于ElasticSearch正在逐步放弃一个索引（Index）建立多个类型（Type）。从ElasticSearch6.x开始，官方只允许一个索引（Index）建立一个类型（Type）。在未来的版本中，类型（Type）这一概念将会被完全移除。在询问身边的朋友所在公司使用的ElasticSearch版本大多是基于ElasticSearch6.x后，决定将基于ElasticSearch6.x开始ElasticSearch之旅。
 
