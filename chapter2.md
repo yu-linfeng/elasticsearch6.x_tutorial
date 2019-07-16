@@ -6,11 +6,12 @@ ES是一个搜索引擎，同时它也是一个分布式文档存储数据库（
 
 在MySQL中共有数据库（Database）、表（Table）、记录（Row）、列（Column）的概念，同样在ES中也有类似的概念，索引（Index），类型（Type），文档（Document），字段（Field）。
 
-姑且可以这么理解：
+可以这么理解：
 
-MySQL：DB      -&gt;  Table  -&gt;  Row           -&gt;  Column
-
-ES       ：Index  -&gt;   Type  -&gt;  Document -&gt;  Field
+|       | 数据库 | 表       | 记录     | 列     |
+| ----- | ------ | -------- | -------- | ------ |
+| MySQL | DB     | Table    | Row      | Column |
+| ES    | Index  | Document | Document | Field  |
 
 ### 索引Index
 
@@ -18,7 +19,9 @@ ES中的索引概念可不是关系型数据库中的“索引”，ES中的索�
 
 ### 类型Type
 
-有的文章指出ES中的类型Type对应的就是关系型数据库中的表，在使用ES中我们会遇到另外一个概念**映射（Mapping）**，也有不少的文章指出Mapping对应的就是关系型数据库中的表。关系型数据库中表与表是物理独立的，即使在两个表中存在相同名称不同类型的列，这在我们的关系型数据库也是极为合理的，但这在ES中就不合理，ES中即使是在同一个索引Index下，如果字段Field存在于不同的类型Type中，即使他们代表不同的含义，但是只要它们的**名称相同也必须要求类型相同**，在ES中类型Type对应于关系型数据库中表的概念已经名存实亡。实际上在ES中Type作为表的概念在后期版本中越来越被弱化，在未被ES正式移除前，ES后期版本已经不允许一个索引Index创建多个Type，相信在后面的版本会彻底移除类型Type。（注：ES6已经不允许一个Index创建多个Type，[https://github.com/elastic/elasticsearch/pull/24317](https://github.com/elastic/elasticsearch/pull/24317)）
+有的文章指出ES中的类型Type对应的就是关系型数据库中的表，在使用ES中我们会遇到另外一个概念**映射（Mapping）**，也有不少的文章指出Mapping对应的就是关系型数据库中的表。关系型数据库中表与表是物理独立的，即使在两个表中存在相同名称不同类型的列，这在我们的关系型数据库也是极为合理的，但这在ES中就不合理，ES中即使是在同一个索引Index下，如果字段Field存在于不同的类型Type中，即使他们代表不同的含义，但是只要它们的**名称相同也必须要求类型相同**，在ES中类型Type对应于关系型数据库中表的概念已经名存实亡。实际上在ES中Type作为表的概念在后期版本中越来越被弱化，在未被ES正式移除前，ES后期版本已经不允许一个索引Index创建多个Type，相信在后面的版本会彻底移除类型Type。
+
+（注：ES6已经不允许一个Index创建多个Type，[https://github.com/elastic/elasticsearch/pull/24317](https://github.com/elastic/elasticsearch/pull/24317)）
 
 如果在现阶段一定要理解ES中的Type，那么一定要和Mapping结合起来。可以理解为类型Type就是定义一个表，仅仅是定义而已，而映射Mapping定义了表结构（有哪些列，列的类型是什么）。
 
@@ -49,4 +52,3 @@ ES可作为分布式集群部署，同样也可以作为单机单节点部署。
 既要对合理的数据增长有一个判断（规划较大的分片），又要对期望有一个度的把握（合理的分片数量）。官方给出了一点建议，每个分片的数据量最好是在20G~40G左右，这就意味着如果你有4个节点，数据量预估在200G左右甚至更大，此时分片数量设置为5~10个比较合适，7、8个差不多，每个节点有2个分片。（官方博客的建议，[https://www.elastic.co/cn/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster](https://www.elastic.co/cn/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster)）
 
 上面谈到的是主分片，副分片的划分也同等重要。如果不对分片备份，主分片故障则导致数据丢失，部分数据不可查询。副本分片设置过多造成额外的存储空间，默认情况下，创建索引时会创建一个分片副本（一个分片副本不代表一个备分片，如果有5个主分片，那么分片副本就有5个备分片，同理如果指定创建两个分片副本，此时一共就有10个备分片。）需要注意的是备分片是可以修改的，所以备分片可以直接采用默认一个分片副本。
-
