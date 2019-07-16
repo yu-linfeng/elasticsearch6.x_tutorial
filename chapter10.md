@@ -22,13 +22,7 @@ ElasticSearch的安装在"准备工作"中已经说明，这里不再赘述。
 
 Kibana6.3.2下载地址（Linux、mac OS、Windows对应不同的版本）：[https://www.elastic.co/cn/downloads/past-releases/kibana-6-3-2](https://www.elastic.co/cn/downloads/past-releases/logstash-6-3-2)。Logstatsh历史版本下载页面：[https://www.elastic.co/cn/downloads/past-releases#kibana](https://www.elastic.co/cn/downloads/past-releases#kibana)。
 
-#### Linux
-
-
-
-
-
-#### macOS
+#### mac OS
 
 1. 通过命令```tar -zxvf kibana-6.3.2-darwin-x86_64.tar.gz```解压到当前用户目录(或者其它位置)。
 2. 解压后进入```kibana-6.3.2-darwin-x86_64```目录，执行```vim config/kibana.yml```命令，修改配置（注意```yml```格式的配置文件冒号必须有英文空格。
@@ -46,13 +40,13 @@ logging.dest: /Users/yulinfeng/log/kibana.log
 
 ![kibana](resources/kibana.png)
 
+#### Linux
+
+安装过程同mac OS。
+
 ### Logstash
 
 Logstash6.3.2下载地址（Linux、mac OS、Windows通用，下载zip包即可）：[https://www.elastic.co/cn/downloads/past-releases/logstash-6-3-2](https://www.elastic.co/cn/downloads/past-releases/logstash-6-3-2)。Logstash历史版本下载页面：[https://www.elastic.co/cn/downloads/past-releases#logstash](https://www.elastic.co/cn/downloads/past-releases#logstash)。
-
-#### Linux
-
-
 
 #### macOS
 
@@ -80,7 +74,9 @@ output {
 
 3. 执行```./bin/logstash -f logstash.conf```命令启动Logstash。
 
-#### Windows
+#### Linux
+
+安装过程同mac OS。
 
 
 

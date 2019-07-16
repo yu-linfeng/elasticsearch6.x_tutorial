@@ -8,7 +8,7 @@ ElasticSearch6.3.2下载地址（Linux、mac OS、Windows通用，下载zip包�
 
 在正式安装前，你需要确保你的系统已配置JDK8环境。
 
-### Linux
+### mac OS
 
 在上述下载地址下载完elasticsearch-6.3.2.tar.gz后，首先在当前登录用户的```home```下创建一个```Settings```目录，通过```tar -zxvf elasticsearch-6.3.2.tar.gz```解压到当前目录。
 
@@ -30,8 +30,8 @@ ElasticSearch6.3.2下载地址（Linux、mac OS、Windows通用，下载zip包�
 }
 ```
 
+### Linux
+
+Linux的安装过程和Linux相同。
+
 **ES需要使用普通用户安装、启动，如果你是root用户，需要先创建一个用户，用普通用户而不是root用户启动ES。**
-
-### mac OS
-
-mac OS的安装过程和Linux相同。
