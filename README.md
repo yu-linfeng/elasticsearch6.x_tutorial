@@ -2,7 +2,7 @@
 
 [查看在线教程](https://yulinfeng.gitbooks.io/elasticsearch/content/)
 
-[下载完整教程]([https://github.com/yu-linfeng/elasticsearch6.x_tutorial/blob/master/ElasticSearch6.x%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B.pdf](https://github.com/yu-linfeng/elasticsearch6.x_tutorial/blob/master/ElasticSearch6.x实战教程.pdf))
+[下载完整教程](https://github.com/yu-linfeng/elasticsearch6.x_tutorial/blob/master/ElasticSearch6.x%E5%AE%9E%E6%88%98%E6%95%99%E7%A8%8B.pdf)
 
 [GitHub仓库](https://github.com/yu-linfeng/elasticsearch6.x_tutorial)
 
