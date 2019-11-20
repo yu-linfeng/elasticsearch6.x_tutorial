@@ -134,14 +134,14 @@ POST http://localhost:9200/user/student/_search?pretty
 			  "fields":{
 				  "keyword":{
 					  "type":"keyword",
-            "ignore_abore":256
+                                          "ignore_above":256
 				  }
 			  }
 		  },
-    "age":{
-        "type":integer
+		   "age":{
+			"type":integer
+		   }
     }
-	}
 }
 ```
 
