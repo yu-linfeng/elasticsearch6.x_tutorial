@@ -139,7 +139,7 @@ POST http://localhost:9200/user/student/_search?pretty
 			  }
 		  },
 		   "age":{
-			"type":integer
+			"type":"integer"
 		   }
     }
 }
