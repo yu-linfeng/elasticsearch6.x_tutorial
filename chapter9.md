@@ -1,6 +1,6 @@
 # Java客户端（下）
 
-基于[Java客户端（上）](minimum_should_match)，本文不再赘述如何创建一个Spring Data ElasticSearch工程，也不再做过多文字叙述。更多的请一定配合源码使用，源码地址[https://github.com/yu-linfeng/elasticsearch6.x_tutorial/tree/master/code/spring-data-elasticsearch]((https://github.com/yu-linfeng/elasticsearch6.x_tutorial/tree/master/code/spring-data-elasticsearch))，具体代码目录在```complex```包。
+基于[Java客户端（上）](minimum_should_match)，本文不再赘述如何创建一个Spring Data ElasticSearch工程，也不再做过多文字叙述。更多的请一定配合源码使用，源码地址[https://github.com/yu-linfeng/elasticsearch6.x_tutorial/tree/master/code/spring-data-elasticsearch](https://github.com/yu-linfeng/elasticsearch6.x_tutorial/tree/master/code/spring-data-elasticsearch)，具体代码目录在```complex```包。
 
 本章请一定结合代码重点关注如何如何通过Java API进行**父子文档的数据插入，以及查询。**
 
